@@ -16,8 +16,16 @@ const buildHtmlForParks = (parkName, parkState, visited) => {
     parkArticle.appendChild(parkH3);
     parkArticle.appendChild(parkPara);
     // console.log(parkSection);
-    mainContainer.appendChild(parkSection);
+    mainContainer.appendChild(parkSection);    
 }
+
+
+// =============== footer ====================
+const footer = document.createElement("footer");
+const para = document.createElement("paragraph");
+para.innerHTML = '<a href="https://darksky.net/poweredby/">Powered by Dark Sky</a>'
+footer.appendChild(para);
+mainContainer.appendChild(footer);
 
 // buildHtmlForParks();
 
