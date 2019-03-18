@@ -37,12 +37,16 @@ const buildHtmlForParks = (parkName, parkState, visited, currently, hourly, dail
     liDaily.textContent = `Week: ${daily}`;
     ulElement.appendChild(liDaily);
 
-
-
-
     console.log(parkSection);
     mainContainer.appendChild(parkSection);
 }
+
+// =============== footer ====================
+const footer = document.createElement("footer");
+const para = document.createElement("paragraph");
+para.innerHTML = "<a href='https://darksky.net/poweredby/'>Powered by Dark Sky</a>";
+footer.appendChild(para);
+mainContainer.appendChild(footer);
 
 // buildHtmlForParks();
 
@@ -62,8 +66,7 @@ const parseAPI = (parsedArray) => {
             currently = parsedResponse.currently.summary;
             hourly = parsedResponse.hourly.summary;
             daily = parsedResponse.daily.summary;
-            buildHtmlForParks(parkObj.name, parkObj.state, parkObj.visited, currently, hourly, daily);    
+            buildHtmlForParks(parkObj.name, parkObj.state, parkObj.visited, currently, hourly, daily);
         })
-        
     });
 }
