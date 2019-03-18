@@ -15,7 +15,7 @@ const buildHtmlForParks = (parkName, parkState, visited) => {
     parkPara.textContent = `The park is located in: ${parkState}` 
     parkArticle.appendChild(parkH3);
     parkArticle.appendChild(parkPara);
-    console.log(parkSection);
+    // console.log(parkSection);
     mainContainer.appendChild(parkSection);
 }
 
