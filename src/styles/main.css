@@ -1,3 +1,6 @@
+body {
+    background-color: lightblue;
+}
 .false {
     border: 2px solid green;
 }
@@ -8,4 +11,12 @@
 
 #display-container {
     margin: 25%;
+}
+
+#park-section {
+    padding: 10px;
+}
+
+#park-article {
+    padding: 5px;
 }

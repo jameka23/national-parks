@@ -1,5 +1,11 @@
 const mainContainer = document.getElementById("display-container");
 
+
+const parksHeader = document.createElement("h1");
+parksHeader.textContent = "National Parks"
+mainContainer.appendChild(parksHeader);
+
+
 const buildHtmlForParks = (parkName, parkState, visited, currently, hourly, daily) => {
     const parkSection = document.createElement("section");
     parkSection.id = "park-section";
