@@ -1,3 +1,4 @@
+const mainContainer = document.getElementById("display-container");
 const api = {
     getParks: function() {
         return fetch("http://localhost:9099/parks")
@@ -9,5 +10,11 @@ const api = {
             method: "GET"
         })
         .then(response => response.json())
+    },
+    deletePark: function(parkId) {
+        return fetch(`http://localhost:9099/parks/${parkId}`, {
+            method: "DELETE"
+        })
+        .then(clearElement(mainContainer))
     }
 }

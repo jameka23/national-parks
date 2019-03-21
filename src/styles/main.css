@@ -1,6 +1,10 @@
 body {
     background-color: lightblue;
 }
+#header-container {
+    display: flex;
+    justify-content: center;
+}
 .false {
     border: 2px solid green;
 }

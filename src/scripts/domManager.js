@@ -1,12 +1,16 @@
-const mainContainer = document.getElementById("display-container");
-
+const headContainer = document.getElementById("header-container");
 
 const parksHeader = document.createElement("h1");
 parksHeader.textContent = "National Parks"
-mainContainer.appendChild(parksHeader);
+headContainer.appendChild(parksHeader);
 
+clearElement = domElement => {
+    while (domElement.firstChild) {
+      domElement.removeChild(domElement.firstChild);
+    }
+  };
 
-const buildHtmlForParks = (parkName, parkState, visited, currently, hourly, daily) => {
+const buildHtmlForParks = (parkName, parkState, visited, currently, hourly, daily, parkDeleteIdButton) => {
     const parkSection = document.createElement("section");
     parkSection.id = "park-section";
 
@@ -43,36 +47,31 @@ const buildHtmlForParks = (parkName, parkState, visited, currently, hourly, dail
     liDaily.textContent = `Week: ${daily}`;
     ulElement.appendChild(liDaily);
 
-    console.log(parkSection);
-    mainContainer.appendChild(parkSection);
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete Park";
+    deleteButton.setAttribute("id", `delete-park--${parkDeleteIdButton}`);
+    parkArticle.appendChild(deleteButton);
+
+    deleteButton.addEventListener("click", handleDelete);
+    return parkSection;
 }
-
-// =============== footer ====================
-const footer = document.createElement("footer");
-const para = document.createElement("paragraph");
-para.innerHTML = "<a href='https://darksky.net/poweredby/'>Powered by Dark Sky</a>";
-footer.appendChild(para);
-mainContainer.appendChild(footer);
-
-// buildHtmlForParks();
 
 const parseAPI = (parsedArray) => {
     console.log(parsedArray); // this is an array
+    let parkSectionFrag = document.createDocumentFragment();
     parsedArray.forEach(parkObj => {
-        // console.log(parkObj.name, parkObj.state)
         let currently = "";
         let hourly = "";
         let daily = "";
+        let parkId = parkObj.id;
         api.getWeather(parkObj.latitude, parkObj.longitude)
         .then(function(parsedResponse ) {
-            // console.log(parsedResponse.currently.summary);
-            // console.log(parsedResponse.hourly.summary);
-            // console.log(parsedResponse.daily.summary);
-            // console.log(parsedResponse);
             currently = parsedResponse.currently.summary;
             hourly = parsedResponse.hourly.summary;
             daily = parsedResponse.daily.summary;
-            buildHtmlForParks(parkObj.name, parkObj.state, parkObj.visited, currently, hourly, daily);
+            parkSectionFrag.appendChild(buildHtmlForParks(parkObj.name, parkObj.state, parkObj.visited, currently, hourly, daily, parkId));
+            mainContainer.appendChild(parkSectionFrag)
         })
-    });
+    })
 }
+
